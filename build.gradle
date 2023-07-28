@@ -52,11 +52,16 @@ dependencies{
 
     implementation group: 'org.bouncycastle', name: 'bcpg-jdk18on', version: '1.75'
     implementation group: 'org.bouncycastle', name: 'bcprov-ext-jdk15to18', version: '1.75'
+    implementation group:'com.sun.xml.bind', name:'jaxb-core', version:'2.2.7'
+    implementation group:'com.sun.xml.bind', name:'jaxb-impl', version:'2.2.5-5'
+    implementation group:'com.sun.xml.bind', name:'jaxb-xjc', version:'2.2.5'
+    implementation group: 'javax.activation', name: 'activation', version: '1.1'
 
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.11.0'
 
 
+    generateJAXB group: 'javax.activation', name: 'activation', version: '1.1'
     generateJAXB group:'com.sun.xml.bind', name:'jaxb-core', version:'2.2.7'
     generateJAXB group:'com.sun.xml.bind', name:'jaxb-impl', version:'2.2.5-5'
     generateJAXB group:'com.sun.xml.bind', name:'jaxb-xjc', version:'2.2.5'
