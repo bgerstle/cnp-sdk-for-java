@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.datatype.DatatypeFactory;
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -1526,7 +1527,7 @@ public class TestCnpOnline {
         activateReversal.setOriginalRefCode("3");
         activateReversal.setOriginalSequenceNumber("999999");
         activateReversal.setOriginalSystemTraceId(5);
-        activateReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl());
+        activateReversal.setOriginalTxnTime(DatatypeFactory.newInstance().newXMLGregorianCalendar());
 
         Communication mockedCommunication = mock(Communication.class);
         when(
@@ -1597,7 +1598,7 @@ public class TestCnpOnline {
         deactivateReversal.setOriginalRefCode("3");
         deactivateReversal.setOriginalSequenceNumber("999999");
         deactivateReversal.setOriginalSystemTraceId(5);
-        deactivateReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl());
+        deactivateReversal.setOriginalTxnTime(DatatypeFactory.newInstance().newXMLGregorianCalendar());
 
         Communication mockedCommunication = mock(Communication.class);
         when(
@@ -1669,7 +1670,7 @@ public class TestCnpOnline {
         loadReversal.setOriginalRefCode("3");
         loadReversal.setOriginalSequenceNumber("999999");
         loadReversal.setOriginalSystemTraceId(5);
-        loadReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl());
+        loadReversal.setOriginalTxnTime(DatatypeFactory.newInstance().newXMLGregorianCalendar());
 
         Communication mockedCommunication = mock(Communication.class);
         when(
@@ -1741,7 +1742,7 @@ public class TestCnpOnline {
         unloadReversal.setOriginalRefCode("3");
         unloadReversal.setOriginalSequenceNumber("999999");
         unloadReversal.setOriginalSystemTraceId(5);
-        unloadReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl());
+        unloadReversal.setOriginalTxnTime(DatatypeFactory.newInstance().newXMLGregorianCalendar());
 
         Communication mockedCommunication = mock(Communication.class);
         when(
@@ -1814,7 +1815,7 @@ public class TestCnpOnline {
         refundReversal.setCard(giftCard);
         refundReversal.setOriginalRefCode("ref");
         refundReversal.setOriginalAmount(44455L);
-        refundReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl());
+        refundReversal.setOriginalTxnTime(DatatypeFactory.newInstance().newXMLGregorianCalendar());
         refundReversal.setOriginalSystemTraceId(3);
         refundReversal.setOriginalSequenceNumber("222222");
         
@@ -1889,7 +1890,7 @@ public class TestCnpOnline {
         depositReversal.setCard(giftCard);
         depositReversal.setOriginalRefCode("101");
         depositReversal.setOriginalAmount(3456L);
-        depositReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl());
+        depositReversal.setOriginalTxnTime(DatatypeFactory.newInstance().newXMLGregorianCalendar());
         depositReversal.setOriginalSystemTraceId(33);
         depositReversal.setOriginalSequenceNumber("111111");
         
@@ -1964,7 +1965,7 @@ public class TestCnpOnline {
         gcAuthReversal.setCard(giftCard);
         gcAuthReversal.setOriginalRefCode("ref");
         gcAuthReversal.setOriginalAmount(44455L);
-        gcAuthReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl());
+        gcAuthReversal.setOriginalTxnTime(DatatypeFactory.newInstance().newXMLGregorianCalendar());
         gcAuthReversal.setOriginalSystemTraceId(3);
         gcAuthReversal.setOriginalSequenceNumber("222222");
         
@@ -2026,7 +2027,7 @@ public class TestCnpOnline {
         gcAuthReversal.setCard(giftCard);
         gcAuthReversal.setOriginalRefCode("ref");
         gcAuthReversal.setOriginalAmount(44455L);
-        gcAuthReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl());
+        gcAuthReversal.setOriginalTxnTime(DatatypeFactory.newInstance().newXMLGregorianCalendar());
         gcAuthReversal.setOriginalSystemTraceId(3);
         gcAuthReversal.setOriginalSequenceNumber("222222");
         
@@ -2092,7 +2093,7 @@ public class TestCnpOnline {
         gcCapture.setCard(giftCard);
         gcCapture.setOriginalRefCode("ref");
         gcCapture.setOriginalAmount(44455L);
-        gcCapture.setOriginalTxnTime(new XMLGregorianCalendarImpl());
+        gcCapture.setOriginalTxnTime(DatatypeFactory.newInstance().newXMLGregorianCalendar());
         
         Communication mockedCommunication = mock(Communication.class);
         when(
@@ -2152,7 +2153,7 @@ public class TestCnpOnline {
         gcCapture.setCard(giftCard);
         gcCapture.setOriginalRefCode("ref");
         gcCapture.setOriginalAmount(44455L);
-        gcCapture.setOriginalTxnTime(new XMLGregorianCalendarImpl());
+        gcCapture.setOriginalTxnTime(DatatypeFactory.newInstance().newXMLGregorianCalendar());
         
         Communication mockedCommunication = mock(Communication.class);
         when(
