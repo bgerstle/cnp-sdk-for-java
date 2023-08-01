@@ -1,10 +1,6 @@
 package io.github.vantiv.sdk;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.Properties;
 
 import javax.xml.bind.JAXBElement;
@@ -20,46 +16,47 @@ public class CnpOnline {
 	private Communication communication;
 	private Boolean removeStubs = false;
 
+  private static Properties loadConfigFromFile() {
+    Properties config;
+    File configLocation = new Configuration().location();
+    try (FileInputStream fileInputStream = new FileInputStream(configLocation)) {
+      config = new Properties();
+      config.load(fileInputStream);
+    } catch (FileNotFoundException e) {
+      throw new CnpOnlineException("Configuration file not found." +
+                                       " If you are not using the .cnp_SDK_config.properties file," +
+                                       " please use the " + CnpOnline.class.getSimpleName() + "(Properties) constructor." +
+                                       " If you are using .cnp_SDK_config.properties, you can generate one using java -jar cnp-sdk-for-java-x.xx.jar", e);
+    } catch (IOException e) {
+      throw new CnpOnlineException("Configuration file could not be loaded.  Check to see if the user running this has permission to access the file", e);
+    }
+    return config;
+  }
+
+  private Integer parseMaxConnections() {
+    String maxConnectionsString = config.getProperty("maxConnections");
+    if (maxConnectionsString == null || maxConnectionsString.isEmpty()) {
+      return null;
+    }
+    return Integer.parseInt(maxConnectionsString);
+  }
+
 	/**
 	 * Construct a CnpOnline using the configuration specified in $HOME/.cnp_SDK_config.properties
 	 */
 	public CnpOnline() {
-
-		communication = new Communication();
-		FileInputStream fileInputStream = null;
-
-		try {
-			config = new Properties();
-			fileInputStream = new FileInputStream((new Configuration()).location());
-			config.load(fileInputStream);
-		} catch (FileNotFoundException e) {
-			throw new CnpOnlineException("Configuration file not found." +
-					" If you are not using the .cnp_SDK_config.properties file," +
-					" please use the " + CnpOnline.class.getSimpleName() + "(Properties) constructor." +
-					" If you are using .cnp_SDK_config.properties, you can generate one using java -jar cnp-sdk-for-java-x.xx.jar", e);
-		} catch (IOException e) {
-			throw new CnpOnlineException("Configuration file could not be loaded.  Check to see if the user running this has permission to access the file", e);
-		} finally {
-		    if (fileInputStream != null){
-		        try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    throw new CnpOnlineException("Configuration FileInputStream could not be closed.", e);
-                }
-		    }
-		}
+    this(loadConfigFromFile());
 	}
+
+  public CnpOnline(Properties config, Boolean removeStubs) {
+    this(config);
+    this.removeStubs = removeStubs;
+  }
 
 	public CnpOnline(Properties config) {
-		this.config = config;
-		communication = new Communication();
+    this.config = config;
+    communication = new Communication(parseMaxConnections());
 	}
-
-    public CnpOnline(Properties config, Boolean removeStubs) {
-        this.config = config;
-        this.removeStubs = removeStubs;
-        communication = new Communication();
-    }
 
 	protected void setCommunication(Communication communication) {
 		this.communication = communication;

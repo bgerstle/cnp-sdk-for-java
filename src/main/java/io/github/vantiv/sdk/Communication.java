@@ -56,6 +56,10 @@ public class Communication {
     private static final String NEUTER_STR = "NEUTERED";
 
     public Communication() {
+        this(null);
+    }
+
+    public Communication(Integer maxConnections) {
         try {
             String protocol = getBestProtocol(SSLContext.getDefault().getSupportedSSLParameters().getProtocols());
             if (protocol == null) {
@@ -71,6 +75,9 @@ public class Communication {
                     .build();
 
             PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager(registry);
+            if (maxConnections != null) {
+                connManager.setDefaultMaxPerRoute(maxConnections);
+            }
 
             HttpRequestRetryStrategy requestRetryStrategy = new DefaultHttpRequestRetryStrategy(0, TimeValue.ofMilliseconds(DEFAULT_RETRY_INTERVAL));
             // Vantiv will a close an idle connection, so we define our Keep-alive strategy to be below that threshold
